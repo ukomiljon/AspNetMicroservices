@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.Domain", "Services\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.Infrastructure", "Services\Product\Product.Infrastructure\Product.Infrastructure.csproj", "{F869FE63-3690-461E-8064-F778A147BCF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureSwitch.API", "Services\FeatureSwitch\FeatureSwitch.API\FeatureSwitch.API.csproj", "{CE4E47B3-B703-45F5-9127-C3A447C72150}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F869FE63-3690-461E-8064-F778A147BCF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F869FE63-3690-461E-8064-F778A147BCF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F869FE63-3690-461E-8064-F778A147BCF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE4E47B3-B703-45F5-9127-C3A447C72150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE4E47B3-B703-45F5-9127-C3A447C72150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE4E47B3-B703-45F5-9127-C3A447C72150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE4E47B3-B703-45F5-9127-C3A447C72150}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{AC95E06C-D2E2-4782-8F63-B4CA9C2D135E} = {7FF6AF7E-9108-453A-B969-8FDCD316B83D}
 		{BF389E81-4455-464A-8CDD-BD8360A1D3EB} = {7FF6AF7E-9108-453A-B969-8FDCD316B83D}
 		{F869FE63-3690-461E-8064-F778A147BCF3} = {7FF6AF7E-9108-453A-B969-8FDCD316B83D}
+		{CE4E47B3-B703-45F5-9127-C3A447C72150} = {734B0855-C2C4-4040-9CB3-D7355F77EA7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D1C54F2-0B61-41D7-ABA7-EC7800C50DE5}
