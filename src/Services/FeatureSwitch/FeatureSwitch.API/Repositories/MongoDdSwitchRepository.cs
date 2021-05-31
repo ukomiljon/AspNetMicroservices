@@ -15,12 +15,12 @@ namespace FeatureSwitch.API.Repositories
         private readonly IMongoCollection<Switch> _switches;
 
         public MongoDdSwitchRepository(IDatabaseSettings settings)
-        {
-            _settings = settings;
+        {            
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
             _switches = database.GetCollection<Switch>(settings.CollectionName);
+            _settings = settings;
         }
 
         public async Task<Switch> Get(string email, string featureName)

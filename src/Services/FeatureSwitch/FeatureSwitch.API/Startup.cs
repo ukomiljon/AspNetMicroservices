@@ -29,6 +29,7 @@ namespace FeatureSwitch.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // auto mapping injection
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MappingProfile());
@@ -43,6 +44,7 @@ namespace FeatureSwitch.API
             //    sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
             //services.AddSingleton<ISwitchRepository>(_ => new MongoDdSwitchRepository(_.GetRequiredService<IDatabaseSettings>()));
 
+            // inmemory injection
             services.AddSingleton<ISwitchRepository>(new InMemorySwitchRepository());
 
             services.AddControllers();
