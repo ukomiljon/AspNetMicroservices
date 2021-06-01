@@ -14,7 +14,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-
+using MassTransit;
+ 
 namespace FeatureSwitch.API
 {
     public class Startup
@@ -47,11 +48,19 @@ namespace FeatureSwitch.API
             // inmemory injection
             //services.AddSingleton<ISwitchRepository>(new InMemorySwitchRepository());
 
+            services.AddMassTransit(config => {
+                config.UsingRabbitMq((ctx, cfg) => {
+                    cfg.Host(Configuration["EventBusSettings:HostAddress"]);
+                    cfg.UseHealthCheck(ctx);
+                });
+            });
+            services.AddMassTransitHostedService();  
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FeatureSwitch.API", Version = "v1" });
-            });
+            }); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

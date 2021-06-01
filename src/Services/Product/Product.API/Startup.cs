@@ -17,6 +17,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MassTransit;
+using Product.API.EventBusConsumer;
+using EventBus.Messages;
 
 namespace Product.API
 {
@@ -34,10 +37,7 @@ namespace Product.API
         {
             services.AddApplicationLayer();
             services.AddIdentityInfrastructure(Configuration);
-
-            // It worked before.
-            //services.AddAutoMapper(typeof(Startup));
-
+           
             // auto mapping injection
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -52,6 +52,21 @@ namespace Product.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product.API", Version = "v1" });
             });
+                        
+            // MassTransit-RabbitMQ Configuration
+            services.AddMassTransit(config => {
+
+                config.AddConsumer<FeatureSwitchConsumer>();
+
+                config.UsingRabbitMq((ctx, cfg) => {
+                    cfg.Host(Configuration["EventBusSettings:HostAddress"]);
+                   
+                    cfg.ReceiveEndpoint(EventBusConstants.SwitchFeatureQueue, c => {
+                        c.ConfigureConsumer<FeatureSwitchConsumer>(ctx);
+                    });
+                });
+            });
+            services.AddMassTransitHostedService(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

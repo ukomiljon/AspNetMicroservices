@@ -1,8 +1,10 @@
 ﻿
 using AutoMapper;
+using EventBus.Messages;
 using FeatureSwitch.API.Dto;
 using FeatureSwitch.API.Models;
 using FeatureSwitch.API.Repositories;
+using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,13 +22,15 @@ namespace FeatureSwitch.API.Controllers
         private readonly ILogger<FeatureController> _logger;
         private readonly ISwitchRepository _repository;
         private readonly IMapper _mapper;
-        
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public FeatureController(ISwitchRepository repository, ILogger<FeatureController> logger, IMapper mapper)
+
+        public FeatureController(ISwitchRepository repository, ILogger<FeatureController> logger, IMapper mapper, IPublishEndpoint publishEndpoint)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _publishEndpoint = publishEndpoint;
         }
 
         [HttpGet]
@@ -55,6 +59,8 @@ namespace FeatureSwitch.API.Controllers
             }
 
             var saved = await _repository.Update(_mapper.Map<Switch>(request));
+            await _publishEndpoint.Publish<SwitchFeatureEvent>(_mapper.Map<SwitchFeatureEvent>(request));
+
             return saved ? Ok() : StatusCode(StatusCodes.Status304NotModified);
         }
     }
