@@ -8,8 +8,7 @@ namespace FeatureSwitch.API
     {
         public MappingProfile()
         {
-            CreateMap<FeatureRequest, Switch>();
-            CreateMap<Switch, FeatureRequest>();
+            CreateMap<FeatureRequest, Switch>().ReverseMap(); 
         }
     }
 }

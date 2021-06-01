@@ -16,7 +16,7 @@ namespace Product.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteProduct(string id)
+        public Task DeleteProduct(string id)
         {
             throw new NotImplementedException();
         }

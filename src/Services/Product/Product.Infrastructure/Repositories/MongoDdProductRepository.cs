@@ -1,33 +1,49 @@
 ﻿ 
 using MongoDB.Driver;
 using Product.Application.Features.Products.Commands.CreateProduct;
+using Product.Application.Features.Products.Commands.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Entities;
 
 namespace Product.Infrastructure.Repositories
 {
     public class MongoDdProductRepository : IProductRepository
     {
-        public Task CreateProduct(Domain.Entities.Product product)
+        private IDatabaseSettings _settings;
+        private readonly IMongoCollection<Domain.Entities.Product> _collection;
+
+        public MongoDdProductRepository(IDatabaseSettings settings)
         {
-            throw new NotImplementedException();
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+
+            _collection = database.GetCollection<Domain.Entities.Product>(settings.CollectionName);
+            _settings = settings;
         }
 
-        public Task<bool> DeleteProduct(string id)
+        public async Task CreateProduct(Domain.Entities.Product product)
         {
-            throw new NotImplementedException();
+            await _collection.InsertOneAsync(product);
         }
 
-        public Task<Domain.Entities.Product> GetProduct(string id)
+        public async Task DeleteProduct(string id)
         {
-            throw new NotImplementedException();
+            await _collection.DeleteOneAsync(_ => _.Id == id);
         }
 
-        public Task<IEnumerable<Domain.Entities.Product>> GetProducts()
+        public async Task<Domain.Entities.Product> GetProduct(string id)
         {
-            throw new NotImplementedException();
+            return await _collection
+                      .Find(_ => _.Id == id)
+                      .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Domain.Entities.Product>> GetProducts()
+        {
+            return await _collection.Find(_ => true).ToListAsync();
         }
     }
 }

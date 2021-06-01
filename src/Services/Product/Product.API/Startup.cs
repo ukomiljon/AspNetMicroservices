@@ -1,3 +1,4 @@
+using AutoMapper; 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -5,9 +6,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models; 
+using Product.Application;
 using Product.Application.Features.Products.Commands.CreateProduct;
+using Product.Application.Features.Products.Commands.Settings;
 using Product.Infrastructure.Repositories;
+using Product.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +32,20 @@ namespace Product.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplicationLayer();
+            services.AddIdentityInfrastructure(Configuration);
 
-            services.AddScoped<IProductRepository, MongoDdProductRepository>();
+            // It worked before.
+            //services.AddAutoMapper(typeof(Startup));
+
+            // auto mapping injection
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper); 
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

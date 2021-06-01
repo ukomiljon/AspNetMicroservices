@@ -39,13 +39,13 @@ namespace FeatureSwitch.API
             services.AddSingleton(mapper);
 
             // mongodb injection
-            //services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
-            //services.AddSingleton<IDatabaseSettings>(sp =>
-            //    sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
-            //services.AddSingleton<ISwitchRepository>(_ => new MongoDdSwitchRepository(_.GetRequiredService<IDatabaseSettings>()));
+            services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
+            services.AddSingleton<IDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+            services.AddSingleton<ISwitchRepository>(_ => new MongoDdSwitchRepository(_.GetRequiredService<IDatabaseSettings>()));
 
             // inmemory injection
-            services.AddSingleton<ISwitchRepository>(new InMemorySwitchRepository());
+            //services.AddSingleton<ISwitchRepository>(new InMemorySwitchRepository());
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

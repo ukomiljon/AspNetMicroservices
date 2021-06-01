@@ -27,7 +27,7 @@ namespace Product.Application.Features.Products.Commands.DeleteProductById
 
         public DeleteProductByIdCommandHandler(IProductRepository productRepository, IMapper mapper, ILogger<CreateProductCommandHandler> logger)
         {
-            _productRepository = _productRepository ?? throw new ArgumentNullException(nameof(productRepository));
+            _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }

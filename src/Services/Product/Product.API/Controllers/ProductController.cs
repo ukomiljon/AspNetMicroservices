@@ -24,19 +24,20 @@ namespace Product.API.Controllers
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
-        
-        [ProducesResponseType(typeof(GetProductViewModel), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<GetProductViewModel>> GetProduct(string productId)
+                
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GetProductViewModel>> Get(string id)
         {
-            var query = new GetProductByIdQuery() { Id = productId };
+            var query = new GetProductByIdQuery() { Id = id };
             var product = await _mediator.Send(query);
             return Ok(product);
         }
-        
+
+        [HttpDelete]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> DeleteProduct(string id)
+        public async Task<ActionResult> Delete(string id)
         {
             var command = new DeleteProductByIdCommand() { Id = id };
             var result = await _mediator.Send(command);
@@ -53,9 +54,8 @@ namespace Product.API.Controllers
         }
 
 
-
-        [ProducesResponseType(typeof(IEnumerable<GetProductViewModel>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<GetProductViewModel>>> GetProducts()
+        [HttpGet]       
+        public async Task<ActionResult<IEnumerable<GetProductViewModel>>> GetAll()
         {
             var query = new GetAllProductsQuery();
             var products = await _mediator.Send(query);
