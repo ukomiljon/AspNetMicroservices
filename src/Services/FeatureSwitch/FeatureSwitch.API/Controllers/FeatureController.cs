@@ -33,7 +33,7 @@ namespace FeatureSwitch.API.Controllers
             _publishEndpoint = publishEndpoint;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult<FeatureResponse>> Get(string email, string featureName)
         {
             var foundFeature = await _repository.Get(email, featureName);
@@ -43,6 +43,13 @@ namespace FeatureSwitch.API.Controllers
             }
 
             return Ok(new FeatureResponse { CanAccess = foundFeature.Enable });
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<string>> GetAll()
+        {
+            var features = new List<string>() { "Create", "Delete", "GetAll", "Get" };
+            return Ok(features);
         }
 
         [HttpPost]

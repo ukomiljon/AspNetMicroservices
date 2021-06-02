@@ -1,23 +1,22 @@
 ﻿
 
 using EventBus.Messages;
-using FeatureSwitch.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FeatureSwitch.API
+namespace Product.Application
 {
-    public class SwitchEqualityComparer : IEqualityComparer<Switch>
+    public class SwitchEqualityComparer : IEqualityComparer<SwitchFeatureEvent>
     {
-        public bool Equals(Switch x, Switch y)
+        public bool Equals(SwitchFeatureEvent x, SwitchFeatureEvent y)
         {
             return x.Email == y.Email && x.FeatureName == y.FeatureName;
         }
 
-        public int GetHashCode([DisallowNull] Switch obj)
+        public int GetHashCode([DisallowNull] SwitchFeatureEvent obj)
         {
             return obj.Email.GetHashCode() + 13 * obj.FeatureName.GetHashCode();
         }

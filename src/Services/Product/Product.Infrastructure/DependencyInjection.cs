@@ -24,7 +24,7 @@ namespace Product.Infrastructure
 
 
             // inmemory injection
-            //services.AddSingleton<ISwitchRepository>(new InMemorySwitchRepository());
+            services.AddSingleton<IProductFeatureRepository>(new InMemoryProductFeatureRepository());
         }
     }
 }

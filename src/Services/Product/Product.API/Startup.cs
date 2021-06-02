@@ -34,7 +34,7 @@ namespace Product.API
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {            
             services.AddApplicationLayer();
             services.AddIdentityInfrastructure(Configuration);
            
@@ -70,6 +70,7 @@ namespace Product.API
                 });
             });
             services.AddMassTransitHostedService();
+            services.AddScoped<FeatureSwitchConsumer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

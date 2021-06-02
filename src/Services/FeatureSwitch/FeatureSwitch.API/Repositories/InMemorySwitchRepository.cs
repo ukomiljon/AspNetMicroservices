@@ -1,6 +1,7 @@
 ﻿
+using EventBus.Messages;
 using FeatureSwitch.API.Models;
-using FeatureSwitch.API.Shared;
+using FeatureSwitch.API.Shared; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,8 @@ namespace FeatureSwitch.API.Repositories
         private readonly Dictionary<Switch, bool> Switches = new Dictionary<Switch, bool>(new SwitchEqualityComparer());
 
         public Task Create(Switch @switch)
-        {
-          
+        {          
             Switches.TryAdd(@switch, @switch.Enable);
-
             return Task.Run(() => @switch.Enable);
         }
 
@@ -44,7 +43,6 @@ namespace FeatureSwitch.API.Repositories
             Switches[@switch] = @switch.Enable;
             return Task.Run(() => false);
         }
-
        
     }
 }
