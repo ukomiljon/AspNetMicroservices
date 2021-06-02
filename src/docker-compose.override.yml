@@ -1,0 +1,38 @@
+version: '3.4'
+
+services:
+  featuredb:
+    container_name: featuredb
+    restart: always
+    ports:
+        - "27017:27017"
+    volumes:
+        - mongo_data:/data/db
+  productdb:
+    container_name: productdb
+    restart: always
+    ports:
+        - "27017:27017"
+    volumes:
+        - mongo_data:/data/db
+
+  featureswitch.api:
+    container_name: featureswitch.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://featuredb:27017"      
+    depends_on:
+      - featuredb
+    ports:
+      - "8000:80"
+
+  product.api:
+    container_name: product.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://productdb:27017"      
+    depends_on:
+      - productdb
+    ports:
+      - "8001:80"
+ 

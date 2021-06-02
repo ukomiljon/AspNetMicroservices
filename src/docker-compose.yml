@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  featuredb:
+    image: mongo
+  featureswitch.api:
+    image: ${DOCKER_REGISTRY-}featureswitchapi
+    build:
+      context: .
+      dockerfile: Services/FeatureSwitch/FeatureSwitch.API/Dockerfile
+
+volumes:
+  mongo_data:
