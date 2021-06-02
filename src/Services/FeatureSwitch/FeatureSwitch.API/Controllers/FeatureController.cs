@@ -55,12 +55,12 @@ namespace FeatureSwitch.API.Controllers
             if (foundFeature==null)
             {                 
                 await _repository.Create(_mapper.Map<Switch>(request));
-                //await _publishEndpoint.Publish<SwitchFeatureEvent>(_mapper.Map<SwitchFeatureEvent>(request));
+                await _publishEndpoint.Publish<SwitchFeatureEvent>(_mapper.Map<SwitchFeatureEvent>(request));
                 return Ok();
             }
 
             var saved = await _repository.Update(_mapper.Map<Switch>(request));
-            //await _publishEndpoint.Publish<SwitchFeatureEvent>(_mapper.Map<SwitchFeatureEvent>(request));
+            await _publishEndpoint.Publish<SwitchFeatureEvent>(_mapper.Map<SwitchFeatureEvent>(request));
 
             return saved ? Ok() : StatusCode(StatusCodes.Status304NotModified);
         }

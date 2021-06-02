@@ -40,10 +40,10 @@ namespace FeatureSwitch.API
             services.AddSingleton(mapper);
 
             // mongodb injection
-            services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
-            services.AddSingleton<IDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
-            services.AddSingleton<ISwitchRepository>(_ => new MongoDdSwitchRepository(_.GetRequiredService<IDatabaseSettings>()));
+            services.AddSingleton<ISwitchRepository>(_ => 
+            new MongoDdSwitchRepository(
+                    Configuration.GetSection(nameof(DatabaseSettings)).Get<DatabaseSettings>()
+                 ));
 
             // inmemory injection
             //services.AddSingleton<ISwitchRepository>(new InMemorySwitchRepository());
