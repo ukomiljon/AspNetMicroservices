@@ -55,6 +55,7 @@ namespace FeatureSwitch.API.Controllers
             if (foundFeature==null)
             {                 
                 await _repository.Create(_mapper.Map<Switch>(request));
+                await _publishEndpoint.Publish<SwitchFeatureEvent>(_mapper.Map<SwitchFeatureEvent>(request));
                 return Ok();
             }
 

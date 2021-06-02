@@ -51,7 +51,7 @@ namespace FeatureSwitch.API
             services.AddMassTransit(config => {
                 config.UsingRabbitMq((ctx, cfg) => {
                     cfg.Host(Configuration["EventBusSettings:HostAddress"]);
-                    cfg.UseHealthCheck(ctx);
+                    //cfg.UseHealthCheck(ctx);
                 });
             });
             services.AddMassTransitHostedService();  
