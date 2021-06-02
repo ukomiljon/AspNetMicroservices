@@ -63,9 +63,6 @@ Result:
    
    ```
 5. Open  product api: http://localhost:8001/swagger/index.html  
-
-6.  
-
  ```
  Request:
 curl -X 'POST' \
