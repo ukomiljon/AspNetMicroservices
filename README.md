@@ -9,7 +9,7 @@ Product api stores it in memorydb and check for each reqquest wheather user has 
 ### How to run.
 
 1. git clone 
-2. open in visual studio or visual studio code and click debug button decker compose or
+2. open in visual studio or visual studio code and click debug button docker-compose or
 3. run  ```docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d```
 4. stop ```docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml down```
 5. click this links to open api swagger
@@ -20,7 +20,7 @@ product api: http://localhost:8001/swagger/index.html
 
 ### Steps to check
 1. open switch feature api: http://localhost:8000/swagger/index.html
-2.  To see all features
+2. to see all features
 
 ```
 Request:
@@ -77,9 +77,9 @@ curl -X 'POST' \
   "email": "abc@example.com"
 }'
 
-Result: 204 success from server. you can get see the created product by name
+Result: 204 success from server. You can get see the created product by name
 ```
-7. go to switch feature api: http://localhost:8000/swagger/index.html, this time we change enable from true to false.
+7. go to switch feature api: http://localhost:8000/swagger/index.html, this time we change feature status enable from true to false.
 
 ```
 Request:
