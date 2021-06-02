@@ -26,9 +26,9 @@ namespace Product.API.Controllers
         }
                 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetProductViewModel>> Get(string id)
+        public async Task<ActionResult<GetProductViewModel>> Get(string id, string email)
         {
-            var query = new GetProductByIdQuery() { Id = id };
+            var query = new GetProductByIdQuery() { Id = id, Email = email };
             var product = await _mediator.Send(query);
             return Ok(product);
         }
@@ -37,9 +37,9 @@ namespace Product.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> Delete(string id)
+        public async Task<ActionResult> Delete(string id, string email)
         {
-            var command = new DeleteProductByIdCommand() { Id = id };
+            var command = new DeleteProductByIdCommand() { Id = id, Email= email };
             var result = await _mediator.Send(command);
             return Ok(result);
         }

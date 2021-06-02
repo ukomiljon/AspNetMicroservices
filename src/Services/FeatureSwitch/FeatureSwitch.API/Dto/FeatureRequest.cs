@@ -10,8 +10,7 @@ namespace FeatureSwitch.API.Dto
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        [Required]
-        [RegularExpression("True")]
+        [Required]         
         public bool Enable { get; set; }
     }
 

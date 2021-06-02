@@ -13,7 +13,9 @@ namespace Product.Infrastructure.Repositories
 
         public Task CreateProduct(Domain.Entities.Product product)
         {
-            throw new NotImplementedException();
+            Products.TryAdd(product.Name, product);
+
+            return Task.Run(() => true);
         }
 
         public Task DeleteProduct(string id)
@@ -21,9 +23,15 @@ namespace Product.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Domain.Entities.Product> GetProduct(string id)
+        public Task<Domain.Entities.Product> GetProduct(string name)
         {
-            throw new NotImplementedException();
+            if (Products.TryGetValue(name, out var product))
+            { 
+                return Task.Run(() => product);
+            }
+
+            product = null;
+            return Task.Run(() => product);
         }
 
         public Task<IEnumerable<Domain.Entities.Product>> GetProducts()

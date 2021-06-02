@@ -13,6 +13,8 @@ namespace Product.Application.Features.Products.Commands.Settings
             CreateMap<CreateProductCommand, Domain.Entities.Product>().ReverseMap();
             CreateMap<GetProductViewModel, Domain.Entities.Product>().ReverseMap();
             CreateMap<SwitchFeatureCommand, SwitchFeatureEvent>().ReverseMap();
+           
+            
         }
     }
 }

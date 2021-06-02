@@ -18,12 +18,13 @@ namespace Product.Infrastructure
         {
             // mongodb injection
             services.Configure<DatabaseSettings>(configuration.GetSection(nameof(DatabaseSettings)));
-            services.AddSingleton<IDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
-            services.AddSingleton<IProductRepository>(_ => new MongoDdProductRepository(_.GetRequiredService<IDatabaseSettings>()));
+            //services.AddSingleton<IDatabaseSettings>(sp =>
+                //sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+            //services.AddSingleton<IProductRepository>(_ => new MongoDdProductRepository(_.GetRequiredService<IDatabaseSettings>()));
 
 
             // inmemory injection
+            services.AddSingleton<IProductRepository>(new InMemoryProductRepository());
             services.AddSingleton<IProductFeatureRepository>(new InMemoryProductFeatureRepository());
         }
     }

@@ -34,6 +34,17 @@ namespace Product.Infrastructure.Repositories
             return Task.Run(() => feature);
         }
 
+        public Task<SwitchFeatureEvent> Get(SwitchFeatureEvent @switch)
+        {
+            return Get(@switch.Email, @switch.FeatureName);
+        }
+
+        public async Task<bool> IsEnabled(string email, string featureName)
+        {
+            var feature = await Get(email, featureName);
+            return feature == null ? false : feature.Enable;
+        }
+
         public   Task<bool> Update(SwitchFeatureEvent @switch)
         {
             if (!FeaturesStatus.ContainsKey(@switch))
