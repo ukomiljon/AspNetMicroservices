@@ -1,6 +1,6 @@
 # Asp .Net Core Microservices with switch feature example.
 
-Building Microservices on .Net which used Asp.Net Core Web API, MongoDB, CQRS (with Mediator Design Pattern including IPipelineBehavior for validation and exceptions), rabbitMQ message broker and Clean Architecture implementation
+To build Microservices with Asp.Net Core Web API, MongoDB, CQRS (with Mediator Design Pattern including IPipelineBehavior for validation and exceptions), rabbitMQ message broker and Clean Architecture implementation
 
 ### Objective.
 There are switch feature api and product api. To manage features of other api by switch feature. SwichFeature send message about feature status to the product api.
