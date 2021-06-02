@@ -3,7 +3,7 @@
 To build Microservices with Asp.Net Core Web API, MongoDB, CQRS (with Mediator Design Pattern including IPipelineBehavior for validation and exceptions), rabbitMQ message broker and Clean Architecture implementation
 
 ### Objective.
-There are switch feature api and product api. To manage features of other api by switch feature. SwichFeature send message about feature status to the product api.
+There are switch feature api and product api. To manage and control each features of microservice by switch feature microservice. SwichFeature api sends message about feature status to the product api via rabberMq.
 Product api stores it in memorydb and check for each reqquest wheather user has access to this command for products.
 
 ### How to run.
@@ -108,4 +108,5 @@ System.NotSupportedException: Create product feature is not evailable.
 TODO:
 1. Disable/enable features automatically on UI using signalR without refreshing browser once feature switch service enables/disbales a feature.
 2. Unit Tests
+ 
  
