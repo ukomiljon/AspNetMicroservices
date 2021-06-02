@@ -3,11 +3,24 @@ version: '3.4'
 services:
   featuredb:
     image: mongo
+  productdb:
+    image: mongo
+  
+  rabbitmq:
+   image: rabbitmq:3-management-alpine
+
   featureswitch.api:
     image: ${DOCKER_REGISTRY-}featureswitchapi
     build:
       context: .
       dockerfile: Services/FeatureSwitch/FeatureSwitch.API/Dockerfile
 
+  product.api:
+    image: ${DOCKER_REGISTRY-}productapi
+    build:
+      context: .
+      dockerfile: Services/Product/Product.API/Dockerfile
+
 volumes:
-  mongo_data:
+  feature_data:
+  product_data:

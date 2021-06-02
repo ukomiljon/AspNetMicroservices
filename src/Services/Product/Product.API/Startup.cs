@@ -52,21 +52,24 @@ namespace Product.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product.API", Version = "v1" });
             });
-                        
+
             // MassTransit-RabbitMQ Configuration
-            services.AddMassTransit(config => {
+            services.AddMassTransit(config =>
+            {
 
                 config.AddConsumer<FeatureSwitchConsumer>();
 
-                config.UsingRabbitMq((ctx, cfg) => {
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
                     cfg.Host(Configuration["EventBusSettings:HostAddress"]);
-                   
-                    cfg.ReceiveEndpoint(EventBusConstants.SwitchFeatureQueue, c => {
+
+                    cfg.ReceiveEndpoint(EventBusConstants.SwitchFeatureQueue, c =>
+                    {
                         c.ConfigureConsumer<FeatureSwitchConsumer>(ctx);
                     });
                 });
             });
-            services.AddMassTransitHostedService(); 
+            services.AddMassTransitHostedService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

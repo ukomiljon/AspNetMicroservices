@@ -48,13 +48,15 @@ namespace FeatureSwitch.API
             // inmemory injection
             //services.AddSingleton<ISwitchRepository>(new InMemorySwitchRepository());
 
-            services.AddMassTransit(config => {
-                config.UsingRabbitMq((ctx, cfg) => {
+            services.AddMassTransit(config =>
+            {
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
                     cfg.Host(Configuration["EventBusSettings:HostAddress"]);
                     //cfg.UseHealthCheck(ctx);
                 });
             });
-            services.AddMassTransitHostedService();  
+            services.AddMassTransitHostedService();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

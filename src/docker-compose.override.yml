@@ -7,32 +7,46 @@ services:
     ports:
         - "27017:27017"
     volumes:
-        - mongo_data:/data/db
+        - feature_data:/data/db
+
   productdb:
     container_name: productdb
     restart: always
     ports:
-        - "27017:27017"
+        - "27018:27017"
     volumes:
-        - mongo_data:/data/db
+        - product_data:/data/db 
+
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+        - "5672:5672"
+        - "15672:15672"
 
   featureswitch.api:
     container_name: featureswitch.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "DatabaseSettings:ConnectionString=mongodb://featuredb:27017"      
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
       - featuredb
+      - rabbitmq
     ports:
-      - "8000:80"
+      - "8000:80" 
+
+
 
   product.api:
     container_name: product.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "DatabaseSettings:ConnectionString=mongodb://productdb:27017"      
+      - "DatabaseSettings:ConnectionString=mongodb://productdb:27018"  
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
       - productdb
+      - rabbitmq
     ports:
       - "8001:80"
- 
+
