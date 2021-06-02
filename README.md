@@ -3,7 +3,8 @@
 To build Microservices with Asp.Net Core Web API, MongoDB, CQRS (with Mediator Design Pattern including IPipelineBehavior for validation and exceptions), rabbitMQ message broker and Clean Architecture implementation
 
 ### Objective.
-There are switch feature api and product api. To manage and control each features of microservice by switch feature microservice. SwichFeature api sends message about feature status to the product api via rabberMq.
+There are switch feature api and product api. To manage and control each features of microservice by switch feature microservice. SwichFeature api sends message about feature status to the product api via rabberMq. 
+Switch api stores feature status in mongodb and send message to product api.
 Product api stores it in memorydb and check for each reqquest wheather user has access to this command for products.
 
 ### How to run.
