@@ -13,7 +13,7 @@ Product api stores it in memorydb and check for each reqquest wheather user has 
 
 ![CQRS Implementation with MediatoR-CQRS Implementation with MediatoR](https://user-images.githubusercontent.com/16934572/120580177-4c884880-c45b-11eb-8be0-798a69580640.png)
 
-![shape](https://user-images.githubusercontent.com/16934572/120580442-cb7d8100-c45b-11eb-960e-0c0bfb956e00.png)
+ ![shape](https://user-images.githubusercontent.com/16934572/120580609-0f708600-c45c-11eb-8261-ca17abb52555.png)
 
 
 ### How to run.
