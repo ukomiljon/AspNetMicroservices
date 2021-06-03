@@ -7,6 +7,15 @@ There are switch feature api and product api. To manage and control each feature
 Switch api stores feature status in mongodb and send message to product api.
 Product api stores it in memorydb and check for each reqquest wheather user has access to this command for products.
 
+## Architecture
+
+![CQRS Implementation with MediatoR-Architecture (2)](https://user-images.githubusercontent.com/16934572/120580027-09c67080-c45b-11eb-8c37-b02d9c63ce75.png)
+
+![CQRS Implementation with MediatoR-CQRS Implementation with MediatoR](https://user-images.githubusercontent.com/16934572/120580177-4c884880-c45b-11eb-8be0-798a69580640.png)
+
+![shape](https://user-images.githubusercontent.com/16934572/120580442-cb7d8100-c45b-11eb-960e-0c0bfb956e00.png)
+
+
 ### How to run.
 
 1. git clone 
